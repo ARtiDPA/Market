@@ -19,12 +19,13 @@ class Database:
         """Initialize database connection.
         
         Args:
-            database_url: Database connection URL. If None, reads from DATABASE_URL env var.
+            database_url: Database connection URL. If None, reads from config.
         """
-        self.database_url = database_url or os.getenv(
-            "DATABASE_URL",
-            "postgresql://market_user:market_pass@localhost:5432/market_db"
-        )
+        if database_url:
+            self.database_url = database_url
+        else:
+            from app.init.config import get_settings
+            self.database_url = get_settings().database_url
         
         self.engine = create_engine(
             self.database_url,
@@ -80,7 +81,6 @@ class Database:
         Base.metadata.drop_all(bind=self.engine)
 
 
-# Global database instance
 db = Database()
 
 
