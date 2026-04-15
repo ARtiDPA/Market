@@ -78,5 +78,4 @@ class JWTManager:
             return None
 
 
-# Global JWT manager instance
 jwt_manager = JWTManager()

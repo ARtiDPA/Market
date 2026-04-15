@@ -6,8 +6,8 @@ app = FastAPI()
 
 
 @app.get('/')
-async def main():
-    return {'message': 'hello'}
+async def healh_check():
+    return {'message': 'sersice is avaible'}
 
 
 if __name__ == '__main__':
