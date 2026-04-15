@@ -1,1 +1,1 @@
-"""Init file."""
+"""Auth service."""
