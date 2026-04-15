@@ -81,7 +81,16 @@ class Database:
         Base.metadata.drop_all(bind=self.engine)
 
 
-db = Database()
+# Global database instance (lazy initialization)
+db: Database | None = None
+
+
+def get_database() -> Database:
+    """Get or create global database instance."""
+    global db
+    if db is None:
+        db = Database()
+    return db
 
 
 def get_db() -> Generator[Session, None, None]:
@@ -95,7 +104,8 @@ def get_db() -> Generator[Session, None, None]:
         def get_users(session: Session = Depends(get_db)):
             return session.query(User).all()
     """
-    session = db.get_session()
+    database = get_database()
+    session = database.get_session()
     try:
         yield session
     finally:

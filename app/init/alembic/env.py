@@ -10,7 +10,10 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(_
 sys.path.insert(0, project_root)
 
 from app.init.database import Base
-from app.init.models import *  # noqa
+
+# Import all models to register them with Base
+from app.init.models.dummy import Dummy  # noqa
+from app.init.models.user import User  # noqa
 
 # Alembic Config object
 config = context.config
@@ -38,6 +41,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        compare_type=True,
     )
 
     with context.begin_transaction():
@@ -55,7 +59,8 @@ def run_migrations_online() -> None:
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
-            target_metadata=target_metadata
+            target_metadata=target_metadata,
+            compare_type=True,
         )
 
         with context.begin_transaction():
