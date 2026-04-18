@@ -10,6 +10,7 @@ class UserRegister(BaseModel):
     """
     login: str
     password: str
+    email: str
     name: str
     last_name: str
 
@@ -22,3 +23,4 @@ class UserLogin(BaseModel):
     """
     login: str
     password: str
+

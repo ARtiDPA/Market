@@ -35,11 +35,11 @@ from sqlalchemy.orm import Session
 from app.init.database import get_db
 from app.init.models.user import User
 from app.auth.security import PasswordHasher as hash
-
+from auth.models.user import UserLogin
 
 class UserRepository:
     """Repository for User model database operations."""
-    
+
     def create_user(
         self,
         login: str,
@@ -84,6 +84,19 @@ class UserRepository:
 
             return user
 
+    def login_user(self, login: str):
+        db: Session
+
+        with get_db() as db:
+            user = db.query(User).filter(
+                (User.login == login)
+            ).first()
+
+            if user:
+                return user
+            
+            raise ValueError('User not found')
+
     def get_user_by_id(self, user_id: int):
         """Get user by ID.
         
@@ -104,7 +117,7 @@ class UserRepository:
                 raise ValueError('User not found')
 
             return ex
-
+    
     def get_user_by_email(self, email: str):
         """Get user by email.
         
@@ -123,7 +136,7 @@ class UserRepository:
             ex = db.query(User).filter(User.email == email).first()
             if not ex:
                 raise ValueError('User not found')
-            
+
             return ex
 
     def delete_user(self, user_id: int) -> bool:
@@ -169,7 +182,7 @@ class UserRepository:
                 user.last_name = last_name
                 db.commit()
                 return user
-                
+
             raise ValueError('User not found')
 
     def change_password(self, user_id: int, hash_password: str):
@@ -194,7 +207,7 @@ class UserRepository:
                 return user
 
             raise ValueError('User not found')
-        
+
     def change_email(self, user_id: int, email: str):
         """Update user email.
         

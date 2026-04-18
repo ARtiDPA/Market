@@ -15,7 +15,7 @@ class JWTManager:
         self.algorithm = self.settings.algorithm
         self.access_token_expire_minutes = self.settings.access_token_expire_minutes
     
-    def create_access_token(self, data: Dict[str, Any], expires_delta: timedelta | None = None) -> str:
+    def create_access_token(self, data: dict[str, Any], expires_delta: timedelta | None = None) -> str:
         """Create access token.
         
         Args:
@@ -36,7 +36,7 @@ class JWTManager:
         encoded_jwt = jwt.encode(to_encode, self.secret_key, algorithm=self.algorithm)
         return encoded_jwt
     
-    def create_refresh_token(self, data: Dict[str, Any], expires_delta: timedelta | None = None) -> str:
+    def create_refresh_token(self, data: dict[str, Any], expires_delta: timedelta | None = None) -> str:
         """Create refresh token.
         
         Args:
@@ -57,7 +57,7 @@ class JWTManager:
         encoded_jwt = jwt.encode(to_encode, self.secret_key, algorithm=self.algorithm)
         return encoded_jwt
     
-    def verify_token(self, token: str, token_type: str = "access") -> Dict[str, Any] | None:
+    def verify_token(self, token: str, token_type: str = "access") -> dict[str, Any] | None:
         """Verify and decode token.
         
         Args:
