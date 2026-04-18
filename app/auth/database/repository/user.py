@@ -32,10 +32,9 @@ Example:
 # pylint: disable=no-member
 from sqlalchemy.orm import Session
 
-from app.init.database import get_db
-from app.init.models.user import User
+from app.auth.database.database import get_db
+from app.auth.database.models.user import User
 from app.auth.security import PasswordHasher as hash
-from auth.models.user import UserLogin
 
 class UserRepository:
     """Repository for User model database operations."""

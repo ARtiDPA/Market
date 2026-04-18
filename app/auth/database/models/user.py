@@ -1,9 +1,9 @@
 """User model."""
 from sqlalchemy import Integer, String, Boolean, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
-from app.init.database import Base
 from sqlalchemy.sql import func
 from datetime import datetime
+from app.auth.database.database import Base
 
 
 

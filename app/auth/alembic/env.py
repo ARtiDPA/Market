@@ -9,11 +9,10 @@ import sys
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 sys.path.insert(0, project_root)
 
-from app.init.database import Base
+from app.auth.database.database import Base
 
 # Import all models to register them with Base
-from app.init.models.dummy import Dummy  # noqa
-from app.init.models.user import User  # noqa
+from app.auth.database.models.user import User  # noqa
 
 # Alembic Config object
 config = context.config

@@ -1,4 +1,4 @@
 """User models package."""
-from app.init.models.user.user import User
+from app.auth.database.models.user import User
 
 __all__ = ["User"]

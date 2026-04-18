@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, Any
 from jose import JWTError, jwt
-from app.init.config import get_settings
+from app.auth.config import get_settings
 
 
 class JWTManager:
