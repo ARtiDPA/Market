@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, Any
 from jose import JWTError, jwt
-from app.auth.config import get_settings
+from app.auth.core.config import get_settings
 
 
 class JWTManager:
@@ -11,9 +11,9 @@ class JWTManager:
     def __init__(self):
         """Initialize JWT manager with settings."""
         self.settings = get_settings()
-        self.secret_key = self.settings.secret_key
-        self.algorithm = self.settings.algorithm
-        self.access_token_expire_minutes = self.settings.access_token_expire_minutes
+        self.secret_key = self.settings.security.secret_key
+        self.algorithm = self.settings.security.algorithm
+        self.access_token_expire_minutes = self.settings.security.access_token_expire_minutes
     
     def create_access_token(self, data: dict[str, Any], expires_delta: timedelta | None = None) -> str:
         """Create access token.
